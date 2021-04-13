@@ -1,11 +1,10 @@
 /**
  * TO-DO:
  * Create Accessor and Mutator methods for all necessary fields
- * JavaDoc Comment all methods
  *
  *
  * @author Maksymilian Sekula
- * @version 9/2/2020
+ * @version 13/4/2021
  */
 
 class Circle{
@@ -38,7 +37,10 @@ class Circle{
     waveObject = waveObj;
   }
   
-  
+  /**
+   * Calculates the x and y position for each circle at each timestep iteratively, 
+   * using a formula that draws a square wave with the final small circle
+   */
   public void calculateSquareWaves(){
     float prevX = initialCircleX;
     float prevY = initialCircleY;
@@ -66,6 +68,10 @@ class Circle{
     }
   }
   
+  /**
+   * Calculates the x and y position for each circle at each timestep iteratively, 
+   * using a formula that draws a sawtooth wave with the final small circle
+   */
   public void calculateSawtoothWaves(){
     float prevX = initialCircleX;
     float prevY = initialCircleY;
@@ -97,6 +103,10 @@ class Circle{
     } //<>//
   }
   
+  /**
+   * Calculates the x and y position for each circle at each timestep iteratively, 
+   * using a formula that draws a pulse wave with the final small circle
+   */
   public void calculatePulseWaves()
   {
     float prevX = initialCircleX;
@@ -124,6 +134,10 @@ class Circle{
     }
   }
   
+  /**
+   * Calculates the x and y position for each circle at each timestep iteratively, 
+   * using a formula that draws a triangluar wave with the final small circle
+   */
   void calculateTriangleWaves()
   {
     float prevX = initialCircleX;
@@ -151,6 +165,10 @@ class Circle{
     }
   }
   
+  /**
+   * Changes the type of wave based upon the key pressed
+   * Adds the most recent calculated value to the wave object
+   */
   public void show()
   {
     if (key == 'e'){

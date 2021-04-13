@@ -1,11 +1,10 @@
 /**
  * TO-DO:
  * (Refactoring)
- * JavaDoc comment all methods
  * Create mutator and accessor methods
  *
  * @author Maksymilian Sekula
- * @version 9/2/2020
+ * @version 13/4/2021
 */
 
 class Wave{
@@ -64,16 +63,20 @@ class Wave{
     return waveList;
   }
   
+  /**
+   * @return The array of float values, which holds the 
+   * y-value of each timestep of the wave generated
+   */
   public float[] getWaveList()
   {
     return waveList;  
   }
   
-  public void changeWaveList(float[] newWaveList)
+  /**
+   * Sets the list of y coordinates to another floating point value array
+   */
+  public void setWaveList(float[] newWaveList)
   {
     waveList = newWaveList;
   }
-  
-  
-  
 }

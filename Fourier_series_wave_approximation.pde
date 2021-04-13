@@ -31,7 +31,9 @@ void setup()
   wave1.appendToFront(circle1.getSmallCircleYValue()); //<>//
 }
 
-// Draw the visualisation of the calculations
+/**
+ * Main method of program to draw visualisation of the calculation
+ */
 void draw()
 {    
   if (focused){
