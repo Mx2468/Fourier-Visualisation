@@ -186,7 +186,6 @@ class Circle {
   }
   
   
-
   /**
    * Calculates the y value of the wave at this timepoint and appends it to the Wave's list
    */
@@ -246,4 +245,20 @@ class Circle {
       this.Num = this.Num-1;
     }
   }
+  
+  /**
+   * Doubles the time step
+   */
+  public void doubleTime()
+  {
+    timeChange = timeChange*2;
+  }
+  
+  /**
+   * Halves the time step
+   */
+ public void halfTime()
+ {
+   timeChange = timeChange/2;
+ }
 }
