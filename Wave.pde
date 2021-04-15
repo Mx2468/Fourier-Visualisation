@@ -1,15 +1,15 @@
 /**
- * TO-DO:
- * (Refactoring)
+ * TODO:
+ * Refactoring
  * Create mutator and accessor methods
- *
+ * 
  * @author Maksymilian Sekula
  * @version 13/4/2021
-*/
+ */
 
 class Wave{
   
-  // Initialises the list needed to store the values for the wave 
+  // Initialises the list needed to store the values for the wave
   private float[] waveList = {};
 
   // Constructor
@@ -18,10 +18,11 @@ class Wave{
   }
   
   /**
-   * Draws out the "Wave" on screen
+   * Draws out the Wave on screen
    */
   public void show(){
     
+    // Parameters for drawing graph
     stroke(255);
     line(500, waveList[0], circle1.getSmallCircleXValue(), waveList[0]);
     noFill();
@@ -41,9 +42,8 @@ class Wave{
   }
   
   /**
-  * Adds element to array
-  * Takes one parameter:
-  * yPosition - the y coordinate to add to the drawn out wave
+  * Adds a y-position to the beginning of the array
+  * @param yPosition the y coordinate to add to the drawn out wave
   */
   public void appendToFront(float yPosition)
   {
@@ -52,8 +52,7 @@ class Wave{
   
   /**
   * Adds y position to end of array
-  * Takes one parameter:
-  * yPosition - the y coordinate to add to the drawn out wave
+  * @param yPosition - the y coordinate to add to the drawn out wave
   */
   public float[] addToEnd(float yPosition)
   {
@@ -73,7 +72,8 @@ class Wave{
   }
   
   /**
-   * Sets the list of y coordinates to another floating point value array
+   * Sets the list of y coordinates to a provided floating point array
+   * (Currently Unused)
    */
   public void setWaveList(float[] newWaveList)
   {

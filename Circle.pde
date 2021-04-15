@@ -1,14 +1,15 @@
-/**
- * TO-DO:
- * Create Accessor and Mutator methods for all necessary fields
+/** //<>//
+ * A class that represents the set of circles at  
  *
+ * TO-DO:
+ * Constructor overloading?
  *
  * @author Maksymilian Sekula
  * @version 13/4/2021
  */
 
-class Circle{
- 
+class Circle {
+
   // Class fields 
   private float radius;
   private float initialCircleX;
@@ -19,15 +20,15 @@ class Circle{
   private int Num;
   private float timeChange;
   private Wave waveObject;
-  
+
   /**
-  * Contructor of class
-  *
-  * @param Radius The radius of the cirle
-  * @param bigX The circle's x coordinate
-  * @param waveObj Wave object
-  */
-  public Circle(int radius,int bigX, int n, Wave waveObj){
+   * Contructor of class, only initialses variables based on default & parameter values
+   *
+   * @param Radius The radius of the cirle
+   * @param bigX The circle's x coordinate
+   * @param waveObj Wave object
+   */
+  public Circle(int radius, int bigX, int n, Wave waveObj) {
     this.radius = radius;
     initialCircleX = bigX;
     initialCircleY = height/2;
@@ -36,73 +37,88 @@ class Circle{
     timeChange = (0.02/n);
     waveObject = waveObj;
   }
-  
+
+
+  // ---- Calculation Methods ----
+
   /**
    * Calculates the x and y position for each circle at each timestep iteratively, 
    * using a formula that draws a square wave with the final small circle
    */
-  public void calculateSquareWaves(){
+  public void calculateSquareWaves() {
+    
+    // Defines X and Y coordinates of previously calculated circle 
     float prevX = initialCircleX;
     float prevY = initialCircleY;
-    
-    for(int n = 0; n < Num; n = n+1){
+    int modifiedN;
+
+    for (int n = 0; n < Num; n = n+1) {
+
+      modifiedN = (n*2)+1;
       
-      int N = n * 2 + 1;
-      
-      smallCircleX = prevX + (radius * 1.5) * (cos(N*time)/N);
-      smallCircleY = prevY + (radius * 1.5) * (sin(N*time)/N);
+      // Formula to calculate position of the circle to create a square wave
+      smallCircleX = prevX + (radius * 1.5) * (cos(modifiedN*time)/modifiedN);
+      smallCircleY = prevY + (radius * 1.5) * (sin(modifiedN*time)/modifiedN);
 
       fill(255);
-      circle(smallCircleX,smallCircleY,5);
-      
+      circle(smallCircleX, smallCircleY, 5);
+
       stroke(255);
-      line(prevX,prevY,smallCircleX,smallCircleY);
-      
+      line(prevX, prevY, smallCircleX, smallCircleY);
+
       stroke(255);
       noFill(); 
-      circle(prevX,prevY,((sqrt(sq(abs(smallCircleX-prevX)) + sq(abs(smallCircleY-prevY))))*2)) ;
-      
+      circle(prevX, prevY, ((sqrt(sq(abs(smallCircleX-prevX)) + sq(abs(smallCircleY-prevY))))*2)) ;
+
       prevX = smallCircleX;
       prevY = smallCircleY;
       time += timeChange;
     }
   }
-  
+
   /**
    * Calculates the x and y position for each circle at each timestep iteratively, 
    * using a formula that draws a sawtooth wave with the final small circle
    */
-  public void calculateSawtoothWaves(){
+  public void calculateSawtoothWaves() {
     float prevX = initialCircleX;
     float prevY = initialCircleY;
-    int N;
-    for(int n = 1; n < Num; n = n+1){
-      if (n % 2 == 0){
-        N = n;
+    int modifiedN;
+    
+    for (int n = 1; n < Num; n = n+1) {
+      
+      if (n % 2 == 0) {
+        modifiedN = n;
       }
-      if (n % 2 == 1){
-        N = -n;
+      
+      else if (n % 2 == 1) {
+        modifiedN = -n;
+      } 
+      
+      else {
+        modifiedN = n; 
       }
-      else N = n ;
-      smallCircleX = prevX + radius * (cos(N*time)/(N));
-      smallCircleY = prevY + radius * (sin(N*time)/(N));
+      
+      // Formula to calculate position of the circle to create a sawtooth wave
+      smallCircleX = prevX + radius * (cos(modifiedN*time)/modifiedN);
+      smallCircleY = prevY + radius * (sin(modifiedN*time)/modifiedN);
 
       fill(255);
-      circle(smallCircleX,smallCircleY,5);
-      
+      circle(smallCircleX, smallCircleY, 5);
+
       stroke(255);
-      line(prevX,prevY,smallCircleX,smallCircleY);
-      
+      line(prevX, prevY, smallCircleX, smallCircleY);
+
       stroke(255);
       noFill(); 
-      circle(prevX,prevY,((sqrt(sq(abs(smallCircleX-prevX)) + sq(abs(smallCircleY-prevY))))*2));
-      
+      circle(prevX, prevY, ((sqrt(sq(abs(smallCircleX-prevX)) + sq(abs(smallCircleY-prevY))))*2));
+
       prevX = smallCircleX;
       prevY = smallCircleY;
       time += timeChange;
-    } //<>//
+    }
   }
-  
+
   /**
    * Calculates the x and y position for each circle at each timestep iteratively, 
    * using a formula that draws a pulse wave with the final small circle
@@ -111,29 +127,31 @@ class Circle{
   {
     float prevX = initialCircleX;
     float prevY = initialCircleY;
-    int N;
-    
-    for(int n = 1; n < Num; n = n+1){
-      N = n ;
-      smallCircleX = prevX + radius/4 * (cos(N*time)/PI);
-      smallCircleY = prevY + radius/4 * (sin(N*time)/PI);
+    int modifiedN;
+
+    for (int n = 1; n < Num; n = n+1) {
+      modifiedN = n ;
+      
+      // Formula to calculate position of the circle to create a pulse wave
+      smallCircleX = prevX + radius/4 * (cos(modifiedN*time)/PI);
+      smallCircleY = prevY + radius/4 * (sin(modifiedN*time)/PI);
 
       fill(255);
-      circle(smallCircleX,smallCircleY,5);
-      
+      circle(smallCircleX, smallCircleY, 5);
+
       stroke(255);
-      line(prevX,prevY,smallCircleX,smallCircleY);
-      
+      line(prevX, prevY, smallCircleX, smallCircleY);
+
       stroke(255);
       noFill(); 
-      circle(prevX,prevY,((sqrt(sq(abs(smallCircleX-prevX)) + sq(abs(smallCircleY-prevY))))*2));
-      
+      circle(prevX, prevY, ((sqrt(sq(abs(smallCircleX-prevX)) + sq(abs(smallCircleY-prevY))))*2));
+
       prevX = smallCircleX;
       prevY = smallCircleY;
       time += timeChange;
     }
   }
-  
+
   /**
    * Calculates the x and y position for each circle at each timestep iteratively, 
    * using a formula that draws a triangluar wave with the final small circle
@@ -142,52 +160,55 @@ class Circle{
   {
     float prevX = initialCircleX;
     float prevY = initialCircleY;
-    int N;
-    
-    for(int n = 1; n < Num; n = n+1){
-      N = n;
-      smallCircleX = prevX + (radius * 1.25) * cos(((2 * N) - 1) * time) * pow(-1, N) / sq((2 * N) - 1);
-      smallCircleY = prevY + (radius * 1.25) * sin(((2 * N) - 1) * time) * pow(-1, N) / sq((2 * N) - 1);
+    int modifiedN;
+
+    for (int n = 1; n < Num; n = n+1) {
+      modifiedN = n;
+      
+      // Formula to calculate position of the circle to create a triangular wave
+      smallCircleX = prevX + (radius * 1.25) * cos(((2*modifiedN)-1)*time)*pow(-1, modifiedN)/sq((2*modifiedN)-1);
+      smallCircleY = prevY + (radius * 1.25) * sin(((2*modifiedN)-1)*time)*pow(-1, modifiedN)/sq((2*modifiedN)-1);
 
       fill(255);
-      circle(smallCircleX,smallCircleY,5);
-      
+      circle(smallCircleX, smallCircleY, 5);
+
       stroke(255);
-      line(prevX,prevY,smallCircleX,smallCircleY);
-      
+      line(prevX, prevY, smallCircleX, smallCircleY);
+
       stroke(255);
       noFill(); 
       circle(prevX, prevY, ((sqrt(sq(abs(smallCircleX - prevX)) + sq(abs(smallCircleY - prevY)))) * 2));
-      
+
       prevX = smallCircleX;
       prevY = smallCircleY;
       time += timeChange;
     }
   }
   
+  
+
   /**
-   * Changes the type of wave based upon the key pressed
-   * Adds the most recent calculated value to the wave object
+   * Calculates the y value of the wave at this timepoint and appends it to the Wave's list
    */
   public void show()
   {
-    if (key == 'e'){
+    // Changes the type of wave based upon the key pressed
+    if (key == 'e') {
       calculatePulseWaves();
-    }
-    else if (key == 't'){
+    } else if (key == 't') {
       calculateTriangleWaves();
-    }
-    else if (key == 'w'){
+    } else if (key == 'w') {
       calculateSawtoothWaves();
-    }
-    else{
+    } else {
       calculateSquareWaves();
     }
-
-    waveObject.addToEnd(getSmallCircleYValue()); //<>//
+    
+    // Adds the most recent calculated value to the wave object
+    waveObject.addToEnd(getSmallCircleYValue());
   }
-  
-  
+
+  // ---- Accessor & Mutator methods ----
+
   /**
    * @return The value of the y coordinate of the smallest circle 
    */
@@ -195,29 +216,34 @@ class Circle{
   {
     return smallCircleY;
   }
-  
+
   /**
    * @return The value of the x coordinate of the smallest circle 
    */
-   public float getSmallCircleXValue()
-   {
-     return smallCircleX; 
-   }   
-  
-  
+  public float getSmallCircleXValue()
+  {
+    return smallCircleX;
+  }   
+
+
   /**
    * Increases the number of circles by 1 
    */
-   public void incremenetN()
-   {
-     this.Num = this.Num+1;   
-   }
-   
+  public void incremenetN()
+  {
+    // Upper limit on number of circles - preformance limitations
+    if(this.Num <1000){
+      this.Num = this.Num+1;
+    }
+  }
+
   /**
    * Decreases the number of circles by 1 
    */
-   public void decremenetN()
-   {
-     this.Num = this.Num-1;   
-   }
+  public void decremenetN()
+  {
+    if(this.Num>0){
+      this.Num = this.Num-1;
+    }
+  }
 }
