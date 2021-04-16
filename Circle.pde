@@ -19,6 +19,7 @@ class Circle {
   private float time;
   private int Num;
   private float timeChange;
+  private WaveCalculationStatus calculationMode;
   private Wave waveObject;
 
   /**
@@ -35,6 +36,7 @@ class Circle {
     time = 0.0;
     Num = n;
     timeChange = (0.02/n);
+    calculationMode = WaveCalculationStatus.SQUARE;
     waveObject = waveObj;
   }
 
@@ -166,8 +168,8 @@ class Circle {
       modifiedN = n;
       
       // Formula to calculate position of the circle to create a triangular wave
-      smallCircleX = prevX + (radius * 1.25) * cos(((2*modifiedN)-1)*time)*pow(-1, modifiedN)/sq((2*modifiedN)-1);
-      smallCircleY = prevY + (radius * 1.25) * sin(((2*modifiedN)-1)*time)*pow(-1, modifiedN)/sq((2*modifiedN)-1);
+      smallCircleX = prevX+(radius*1.25)*cos(((2*modifiedN)-1)*time)*pow(-1,modifiedN)/sq((2*modifiedN)-1);
+      smallCircleY = prevY+(radius*1.25)*sin(((2*modifiedN)-1)*time)*pow(-1,modifiedN)/sq((2*modifiedN)-1);
 
       fill(255);
       circle(smallCircleX, smallCircleY, 5);
@@ -186,21 +188,28 @@ class Circle {
   }
   
   
-
   /**
    * Calculates the y value of the wave at this timepoint and appends it to the Wave's list
    */
   public void show()
   {
-    // Changes the type of wave based upon the key pressed
-    if (key == 'e') {
-      calculatePulseWaves();
-    } else if (key == 't') {
-      calculateTriangleWaves();
-    } else if (key == 'w') {
-      calculateSawtoothWaves();
-    } else {
-      calculateSquareWaves();
+    // Changes the type of wave based upon the state selected
+    switch (calculationMode) {
+      case PULSE:
+        calculatePulseWaves();
+        break;
+      case SQUARE:
+        calculateSquareWaves();
+        break;
+      case SAWTOOTH:
+        calculateSawtoothWaves();
+        break;
+      case TRIANGLE:
+        calculateTriangleWaves();
+        break;
+      default:
+        calculateSquareWaves();
+        break;
     }
     
     // Adds the most recent calculated value to the wave object
@@ -246,4 +255,27 @@ class Circle {
       this.Num = this.Num-1;
     }
   }
+  
+  /**
+   * Doubles the time step
+   */
+  public void doubleTime()
+  {
+    timeChange = timeChange*2;
+  }
+  
+  /**
+   * Halves the time step
+   */
+ public void halfTime()
+ {
+   if(timeChange > Float.MIN_VALUE){
+     timeChange = timeChange/2;
+   }
+ }
+ 
+ public void setCalculationMode(WaveCalculationStatus typeOfWave)
+ {
+   calculationMode = typeOfWave;
+ }
 }
