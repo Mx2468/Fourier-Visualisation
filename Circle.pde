@@ -269,6 +269,7 @@ class Circle {
    */
  public void halfTime()
  {
+<<<<<<< HEAD
    if(timeChange > Float.MIN_VALUE){
      timeChange = timeChange/2;
    }
@@ -277,5 +278,8 @@ class Circle {
  public void setCalculationMode(WaveCalculationStatus typeOfWave)
  {
    calculationMode = typeOfWave;
+=======
+   timeChange = timeChange/2;
+>>>>>>> main
  }
 }
