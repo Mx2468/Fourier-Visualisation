@@ -1,11 +1,9 @@
 /**
  * 
  * General TODO:
- * Implement change of speed when left and right keys are pressed
  * Refactor the classes to decrease coupling
  * Change sizing to be dependent on system screen size
  * Create Coordinate class
- * Put key functionality from Circle into keyPressed()
  *
  * @author Maksymilian Sekula
  * @version 15/04/2021
@@ -37,7 +35,7 @@ void draw()
     // Sets background, and draws the visualisation for every cycle when focused on the window
     background(0);
     
-    text("Number of circles:"+circle1.)
+    text("Number of circles:"+circle1.getN()+"  Timestep:"+circle1.getTimestep(), 550, 580);
     
     circle1.show();
     wave1.show();
@@ -50,22 +48,28 @@ void draw()
  */
 void keyPressed()
 {
+  switch(keyCode){
   // Number of circles controlled by up and down arrows
-  if(keyCode == UP){
-    circle1.incremenetN();
-  }
+  case UP:
+    circle1.incrementN();
+    break;
   
-  else if (keyCode == DOWN){
-    circle1.decremenetN();
-  }
+  case DOWN:
+    circle1.decrementN();
+    break;
   
   // Time Step controlled by right and left arrows
-  else if(keyCode == RIGHT){
+  case RIGHT:
     circle1.doubleTime();
-  }
+    break;
   
-  else if (keyCode == LEFT){
+  case LEFT:
     circle1.halfTime();
+    break;
+    
+  case SHIFT:
+    circle1.resetTime();
+    break;
   }
   
   // Selects which type of wave is shown 

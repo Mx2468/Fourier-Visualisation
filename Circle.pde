@@ -5,7 +5,7 @@
  * Constructor overloading?
  *
  * @author Maksymilian Sekula
- * @version 13/4/2021
+ * @version 15/04/2021
  */
 
 class Circle {
@@ -234,11 +234,18 @@ class Circle {
     return smallCircleX;
   }   
 
+  /**
+   * @return the number of circles 
+   */
+  public int getN()
+  {
+    return Num;
+  }
 
   /**
    * Increases the number of circles by 1 
    */
-  public void incremenetN()
+  public void incrementN()
   {
     // Upper limit on number of circles - preformance limitations
     if(this.Num <1000){
@@ -249,11 +256,27 @@ class Circle {
   /**
    * Decreases the number of circles by 1 
    */
-  public void decremenetN()
+  public void decrementN()
   {
     if(this.Num>0){
       this.Num = this.Num-1;
     }
+  }
+  
+  /**
+   * @return the time step between calculations
+   */
+  public float getTimestep()
+  {
+    return timeChange;
+  }
+  
+  /**
+   * Resets the total elapsed time
+   */
+  public void resetTime()
+  {
+    time = 0;
   }
   
   /**
@@ -267,19 +290,19 @@ class Circle {
   /**
    * Halves the time step
    */
- public void halfTime()
- {
-<<<<<<< HEAD
-   if(timeChange > Float.MIN_VALUE){
-     timeChange = timeChange/2;
-   }
- }
+   public void halfTime()
+   {
+     if(timeChange > Float.MIN_VALUE){
+       timeChange = timeChange/2;
+     }
+   } 
  
+ /**
+  * Sets the wave to be calculated
+  * @param type of calculation to be preformed
+  */
  public void setCalculationMode(WaveCalculationStatus typeOfWave)
  {
    calculationMode = typeOfWave;
-=======
-   timeChange = timeChange/2;
->>>>>>> main
  }
 }
